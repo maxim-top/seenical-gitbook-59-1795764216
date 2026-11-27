@@ -1,5 +1,5 @@
 {
-    "title": "产品文档",
+    "title": "蓝莺1127-1 文档站",
     "description": "",
     "author": "",
     "output.name": "site",
@@ -59,7 +59,7 @@
             "edit": true
         },
         "tbfed-pagefooter": {
-            "copyright": "",
+            "copyright": "© 2026 蓝莺1127-1 | <a href='/' data-seenical-site-path=\"/\" target='_blank' style='text-decoration:none!important;'>首页</a> | <a href='/sitemap.xml' data-seenical-site-path=\"/sitemap.xml\" style='text-decoration:none!important;' target='_blank'>网站地图</a>",
             "modify_label": "该文件修订时间：",
             "modify_format": "YYYY-MM-DD HH:mm:ss"
         },
@@ -68,7 +68,7 @@
             "skipFirstH1": true
         },
         "edit-link": {
-            "base": "",
+            "base": "https://github.com/maxim-top/seenical-gitbook-59-1795764216/blob/master",
             "label": "在GitHub上编辑"
         },
         "favicon": {
@@ -137,7 +137,7 @@
             "grid-columns": 3
         },
         "canonical-link": {
-            "baseURL": ""
+            "baseURL": "https://xntfgh.site.chatai101.com"
         },
         "image-captions": {
             "caption": "_CAPTION_"
@@ -154,12 +154,12 @@
             "token": ""
         },
         "ga4": {
-            "tag": ""
+            "tag": "G-ML890EBLK5"
         },
         "seenical": {
             "footer_note": "",
             "lanying_link": "",
-            "sitemap_hostname": "",
+            "sitemap_hostname": "https://xntfgh.site.chatai101.com/",
             "sitemap_default_language": ""
         }
     }

@@ -1,3 +1,37 @@
 {
-    "language": "zh-hans"
+    "language": "zh-hans",
+    "title": "蓝莺1127-1 文档站",
+    "pluginsConfig": {
+        "versions": {
+            "options": []
+        },
+        "edit-link": {
+            "base": "https://github.com/maxim-top/seenical-gitbook-59-1795764216/blob/master"
+        },
+        "tbfed-pagefooter": {
+            "modify_label": "该文件修订时间：",
+            "copyright": "© 2026 蓝莺1127-1 | <a href='/' data-seenical-site-path=\"/\" target='_blank' style='text-decoration:none!important;'>首页</a> | <a href='/sitemap.xml' data-seenical-site-path=\"/sitemap.xml\" style='text-decoration:none!important;' target='_blank'>网站地图</a>"
+        },
+        "intopic-toc": {
+            "label": "内容"
+        },
+        "logo": {
+            "url": "/"
+        },
+        "meta": {
+            "data": [
+                {
+                    "name": "keywords",
+                    "content": ""
+                }
+            ]
+        },
+        "seenical": {
+            "footer_note": "",
+            "lanying_link": "",
+            "hook_sentence_slogan": "",
+            "sitemap_hostname": "https://xntfgh.site.chatai101.com/",
+            "hook_sentence_image": ""
+        }
+    }
 }
