@@ -83,7 +83,16 @@
         },
         "versions": {
             "type": "languages",
-            "options": []
+            "options": [
+                {
+                    "value": "/",
+                    "text": "简体中文"
+                },
+                {
+                    "value": "/en/",
+                    "text": "English"
+                }
+            ]
         },
         "sharing": {
             "douban": true,

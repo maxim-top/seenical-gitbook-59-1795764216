@@ -1,0 +1,46 @@
+{
+    "language": "en",
+    "title": "lanying im",
+    "pluginsConfig": {
+        "versions": {
+            "options": [
+                {
+                    "value": "/",
+                    "text": "简体中文"
+                },
+                {
+                    "value": "/en/",
+                    "text": "English"
+                }
+            ]
+        },
+        "edit-link": {
+            "base": "https://github.com/maxim-top/seenical-gitbook-59-1795764216/blob/master"
+        },
+        "tbfed-pagefooter": {
+            "modify_label": "Updated: ",
+            "copyright": "© 2026 lanying im 1127-1 | <a href='/' data-seenical-site-path=\"/\" target='_blank' style='text-decoration:none!important;'>Home</a> | <a href='/sitemap.xml' data-seenical-site-path=\"/sitemap.xml\" style='text-decoration:none!important;' target='_blank'>Sitemap</a>"
+        },
+        "intopic-toc": {
+            "label": "Contents"
+        },
+        "logo": {
+            "url": "/"
+        },
+        "meta": {
+            "data": [
+                {
+                    "name": "keywords",
+                    "content": ""
+                }
+            ]
+        },
+        "seenical": {
+            "footer_note": "",
+            "lanying_link": "",
+            "hook_sentence_slogan": "",
+            "sitemap_hostname": "https://xntfgh.site.chatai101.com/",
+            "hook_sentence_image": ""
+        }
+    }
+}

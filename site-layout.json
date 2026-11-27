@@ -5,6 +5,10 @@
         "zh-hans": {
             "source_dir": "zh-hans",
             "public_path": "/"
+        },
+        "en": {
+            "source_dir": "en",
+            "public_path": "/en/"
         }
     },
     "legacy_root_language": "zh-hans"
