@@ -268,10 +268,18 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('native_output', type=Path, nargs='?', default=Path('_book'))
     parser.add_argument('published_output', type=Path, nargs='?')
-    parser.add_argument('--config', type=Path, default=Path('site-layout.json'))
+    parser.add_argument('--config', type=Path)
     parser.add_argument('--site-url')
     args = parser.parse_args()
-    config = json.loads(args.config.read_text())
+    config_path = args.config or Path('site-layout.json')
+    if args.config is None and not config_path.exists():
+        config_path = Path('seenical.json')
+    config = json.loads(config_path.read_text())
+    if config_path.name == 'seenical.json':
+        if config.get('template') != 'seenical' or config.get('repository_version') != 1:
+            raise ValueError('unsupported Seenical site configuration')
+        # The combined manifest uses the same public path rules as layout version 2.
+        config['version'] = 2
     default = config['default_language']
     if default not in config['languages']:
         raise ValueError('default language is missing')
@@ -288,7 +296,7 @@ def main():
     root_language = config.get('legacy_root_language')
     if root_language and root_language not in config['languages']:
         raise ValueError('legacy root language is missing')
-    book = json.loads((args.config.parent / 'book.json').read_text())
+    book = json.loads((config_path.parent / 'book.json').read_text())
     plugins = book.get('pluginsConfig', {})
     active = {name.split('@', 1)[0] for name in book['plugins']} if 'plugins' in book else plugins
     plugin_key = next((name for name in ('seenical', 'lanying-grow-ai') if name in active), None)

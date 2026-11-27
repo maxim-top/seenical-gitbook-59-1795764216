@@ -108,9 +108,66 @@ jobs:
         tag: ${{ env.NEW_TAG }}
         commit: ${{ env.COMMIT_HASH }}
 
-    - name: Call grow ai to deploy
+    - name: Request site deployment
+      id: deploy
       if: github.event_name == 'push'
       run: |
-        curl -X POST 'https://connector.lanyingim.com/grow_ai/release_finish' \
-        -H "Content-Type: application/json" \
-        -d '{"status": "ok", "repository": "${{ github.repository }}", "release": "${{ env.NEW_TAG }}"}'
+        payload=$(jq -n --arg repo "$GITHUB_REPOSITORY" --arg tag "$NEW_TAG" \
+          '{status:"ok", repository:$repo, release:$tag, return_run_details:true}')
+        # Submit once. A lost response does not mean that dispatch failed.
+        if ! reply=$(curl --fail-with-body -sS --connect-timeout 10 --max-time 180 \
+          -H 'Content-Type: application/json' --data "$payload" \
+          'https://connector.lanyingim.com/grow_ai/release_finish'); then
+          echo "::error::Could not confirm deployment submission for $NEW_TAG. Check the deployment history before retrying."
+          exit 1
+        fi
+        if ! jq -se 'length == 1 and (.[0] | .code == 200 and .data.success == true)' <<< "$reply" >/dev/null; then
+          echo "Deployment request rejected for $NEW_TAG" >&2
+          jq -r '.message // "Unexpected Connector response"' <<< "$reply" >&2
+          exit 1
+        fi
+        run_id=$(jq -r '.data.workflow_run_id | select(type == "number")' <<< "$reply")
+        echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
+
+    - name: Wait for site deployment
+      if: github.event_name == 'push'
+      timeout-minutes: 16
+      env:
+        RUN_ID: ${{ steps.deploy.outputs.run_id }}
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        if [[ ! "$RUN_ID" =~ ^[1-9][0-9]*$ ]]; then
+          echo "::error::Deployment accepted for $NEW_TAG, but this Connector returned no run ID. Check https://github.com/maxim-top/im.gitbook/actions/workflows/deploy_sub_site.yml before retrying."
+          exit 1
+        fi
+        run_url="https://github.com/maxim-top/im.gitbook/actions/runs/$RUN_ID"
+        echo "Waiting for $NEW_TAG: $run_url"
+        auth=(-H "Authorization: Bearer $GH_TOKEN")
+        failures=0
+        while (( SECONDS < 900 )); do
+          status=$(curl -sS "${auth[@]}" --connect-timeout 5 --max-time 10 -o "$RUNNER_TEMP/deploy-run.json" \
+            -w '%{http_code}' "https://api.github.com/repos/maxim-top/im.gitbook/actions/runs/$RUN_ID") || status=000
+          if [[ "$status" == 200 ]] && state=$(jq -er '.status' "$RUNNER_TEMP/deploy-run.json"); then
+            failures=0
+            if [[ "$state" == completed ]]; then
+              conclusion=$(jq -r '.conclusion' "$RUNNER_TEMP/deploy-run.json")
+              if [[ "$conclusion" == success ]]; then
+                echo "Site deployed: $run_url"
+                exit 0
+              fi
+              echo "::error::Site deployment ended with $conclusion. See $run_url"
+              exit 1
+            fi
+          else
+            # Repository-scoped tokens may lack access to the central repo; it is public.
+            if [[ "$status" == 403 || "$status" == 404 ]]; then auth=(); fi
+            failures=$((failures + 1))
+            if (( failures >= 3 )); then
+              echo "::error::Deployment result unconfirmed after 3 unsuccessful status checks (HTTP $status). See $run_url"
+              exit 1
+            fi
+          fi
+          sleep 20
+        done
+        echo "::error::Deployment result unconfirmed after 15 minutes. Check $run_url before retrying."
+        exit 1

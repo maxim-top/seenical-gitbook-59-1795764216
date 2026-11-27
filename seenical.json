@@ -1,5 +1,6 @@
 {
-    "version": 2,
+    "template": "seenical",
+    "repository_version": 1,
     "default_language": "zh-hans",
     "languages": {
         "zh-hans": {
