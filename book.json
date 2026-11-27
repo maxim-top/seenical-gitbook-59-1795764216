@@ -86,11 +86,11 @@
             "options": [
                 {
                     "value": "/",
-                    "text": "English"
+                    "text": "简体中文"
                 },
                 {
-                    "value": "/zh-hans/",
-                    "text": "简体中文"
+                    "value": "/en/",
+                    "text": "English"
                 }
             ]
         },
