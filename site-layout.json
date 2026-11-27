@@ -1,15 +1,15 @@
 {
     "version": 2,
-    "default_language": "zh-hans",
+    "default_language": "en",
     "languages": {
         "zh-hans": {
             "source_dir": "zh-hans",
-            "public_path": "/"
+            "public_path": "/zh-hans/"
         },
         "en": {
             "source_dir": "en",
-            "public_path": "/en/"
+            "public_path": "/"
         }
     },
-    "legacy_root_language": "zh-hans"
+    "legacy_root_language": "en"
 }
