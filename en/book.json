@@ -19,7 +19,7 @@
         },
         "tbfed-pagefooter": {
             "modify_label": "Updated: ",
-            "copyright": "© 2026 lanying im 1127-1 | <a href='/' data-seenical-site-path=\"/\" target='_blank' style='text-decoration:none!important;'>Home</a> | <a href='/sitemap.xml' data-seenical-site-path=\"/sitemap.xml\" style='text-decoration:none!important;' target='_blank'>Sitemap</a>"
+            "copyright": "© 2026 LanyingIM 1127-1 | <a href='/' data-seenical-site-path=\"/\" target='_blank' style='text-decoration:none!important;'>Home</a> | <a href='/sitemap.xml' data-seenical-site-path=\"/sitemap.xml\" style='text-decoration:none!important;' target='_blank'>Sitemap</a>"
         },
         "intopic-toc": {
             "label": "Contents"
