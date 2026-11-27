@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+.vscode/
+_book
+
+.build/
+.gitbook-cli/
+book.tar.gz
+
+__pycache__/

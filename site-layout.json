@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "default_language": "zh-hans",
+    "languages": {
+        "zh-hans": {
+            "source_dir": "zh-hans",
+            "public_path": "/"
+        }
+    },
+    "legacy_root_language": "zh-hans"
+}

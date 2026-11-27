@@ -1,0 +1,8 @@
+/README.md
+/Makefile
+/.build/
+/.gitbook-cli/
+/tests/
+/scripts/
+/site-layout.json
+/book.tar.gz
